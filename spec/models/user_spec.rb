@@ -31,5 +31,17 @@ let(:user) { create(:user) }
 #        expect(user_2).to_not be_valid
 #      end
     end
+
+    describe "session create and destroy" do
+
+      it "should create a new session upon sign in" do
+      end
+
+      it "should destroy current session upon sign out" do
+      end
+
+      it "should ... " do
+      end
+    end
   end
 end
