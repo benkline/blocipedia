@@ -1,2 +1,8 @@
 <h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+
+<img src="https://bloc-global-assets.s3.amazonaws.com/images-full-stack/projects/blocipedia/blocipedia_index.png" alt="edit page">
+
+<%#= render @user.page %>
+<!--the link below should trigger the pages/new route and create a new page, then
+take the user to the edit page associated with the new id-->
+<a href="pages/:id/edit" class="btn btn-success-outline" role="button">New Page</a>
