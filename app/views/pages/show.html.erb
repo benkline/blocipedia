@@ -1,10 +1,10 @@
-<h1>Pages#show</h1>
-
-<img src="https://bloc-global-assets.s3.amazonaws.com/images-full-stack/projects/blocipedia/blocipedia_show.png" alt="edit page">
-
- <h1>page title<%= @page.title %></h1>
- <p>page body<%= @page.body %></p>
- <%#= render @user.page %>
- <!--the link below should trigger the pages/new route and create a new page, then
+<div class="container marketing">
+  <h1>Pages#show</h1>
+  <img src="https://bloc-global-assets.s3.amazonaws.com/images-full-stack/projects/blocipedia/blocipedia_show.png" alt="edit page">
+  <h1>page title<%= @page.title %></h1>
+  <p>page body<%= @page.body %></p>
+  <%#= render @user.page %>
+  <!--the link below should trigger the pages/new route and create a new page, then
  take the user to the edit page associated with the new id-->
-<button type="submit" class="btn btn-secondary-outline" value="pages/:id/edit">Edit Page</button>
+  <%= button_to "Edit", method: :update %>
+</div>
