@@ -24,9 +24,26 @@
     <% end %>
     <h3 class="text-muted">Blocipedia: Social, Markdown Wikis</h3>
   </div>
+  <% if flash[:notice] %>
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash[:notice] %>
+  </div>
+  <% elsif flash.now[:alert] %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash.now[:alert] %>
+  </div>
+  <% elsif flash[:alert] %>
+  <div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <%= yield %>
 </body>
   <footer class="footer">
-    <p>&copy; 2015 32nd Communications, LLC.</p>
+    <p>&copy; 2015, <a href="http://www.ben-kline.com">32nd Communications</a></p>
   </footer>
 </html>
