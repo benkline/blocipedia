@@ -1,13 +1,21 @@
 <div class="container marketing">
-  <h1>Pages#index</h1>
-  <img src="https://bloc-global-assets.s3.amazonaws.com/images-full-stack/projects/blocipedia/blocipedia_index.png" alt="edit page">
-  <br><br>
-  <%#if @user.page.count == !nil%>
-    <%#= render @user.page %>
-  <%#else%>
-    <h2>Create your first page!</h2>
-  <%#end%>
-    <!--the link below should trigger the pages/new route and create a new page, then
-take the user to the edit page associated with the new id-->
-  <%= button_to "New Page", new_page_path%>
+  <% if current_user.pages.count != nil%>
+  <h2>Public Pages</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+      <% @pages.each do |page| %>
+        <tr>
+          <td><%= page.title%></br>
+            <small>updated <%= time_ago_in_words(page.updated_at)%></small></td>
+          <td><%= button_to 'Edit', edit_page_path(page), {:method=> :get, :class => "btn btn-warning"}%></td>
+          <td><%= button_to 'Delete', page_path(page), {:method=> :delete, :class => "btn btn-danger"}%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  <% else %>
+  <h2>Create your first page!</h2>
+  <% end%>
+<br><br>
+  <%= button_to 'New Page', new_page_path(@page), {:method=> :get, :class => "btn btn-secondary"}%>
 </div>

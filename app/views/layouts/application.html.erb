@@ -12,7 +12,7 @@
   <div class="header clearfix">
     <% if user_signed_in? %>
       <ul class="nav nav-pills pull-right">
-        <li><a href="#">Signed in as: <strong><%= current_user.email %></strong></a></li>
+        <li><a href="/pages">Signed in as: <strong><%= current_user.email %></strong></a></li>
         <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
       </ul>

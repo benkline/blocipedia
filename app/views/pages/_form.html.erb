@@ -1,22 +1,22 @@
-<%= form_for [page] do |f| %>
+<%= form_for @page do |f| %>
 
-  <% if page.errors.any? %>
+  <% if @page.errors.any? %>
     <div class="alert alert-danger">
-      <h4><%= pluralize(page.errors.count, "error") %>.</h4>
+      <h4><%= pluralize(@page.errors.count, "error") %>.</h4>
       <ul>
-        <% page.errors.full_messages.each do |msg| %>
+        <% @page.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <%= form_group_tag(page.errors[:title]) do %>
+  <%= form_group_tag(@page.errors[:title]) do %>
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control', placeholder: "Enter page title" %>
   <% end %>
 
-  <%= form_group_tag(page.errors[:body]) do %>
+  <%= form_group_tag(@page.errors[:body]) do %>
     <%= f.label :body %>
     <%= f.text_area :body, rows: 20, class: 'form-control', placeholder: "Enter page body" %>
   <% end %>

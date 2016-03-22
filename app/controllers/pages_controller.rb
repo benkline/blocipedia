@@ -14,8 +14,7 @@ page      GET    /pages/:id(.:format)           pages#show
   end
 
   def create
-    @page = Page.find(params[:page_id])
-    @page = @page.build(page_params)
+    @page = Page.new(page_params)
     @page.user = current_user
 
     if @page.save
@@ -40,7 +39,7 @@ page      GET    /pages/:id(.:format)           pages#show
   end
 
   def update
-     @page = page.find(params[:id])
+     @page = Page.find(params[:id])
      @page.assign_attributes(page_params)
 
      if @page.save
@@ -53,7 +52,7 @@ page      GET    /pages/:id(.:format)           pages#show
    end
 
   def destroy
-  @page = page.find(params[:id])
+  @page = Page.find(params[:id])
 
   if @page.destroy
     flash[:notice] = "\"#{@page.title}\" was deleted successfully."
@@ -66,15 +65,7 @@ end
 
   private
   def page_params
-    params.require(:page).permit(:title, :body)
-  end
-
-  def authorize_user
-    page = Page.find(params[:id])
-    unless current_user == page.user || current_user.admin?
-      flash[:alert] = "Momma told the doctor and the doctor said - no more monkeys, jumpin on the (admin's) bed."
-      redirect_to [page]
-    end
+    params.require(:page).permit(:user, :title, :body)
   end
 
 end

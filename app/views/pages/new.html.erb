@@ -1,15 +1,1 @@
-<div class="container marketing">
-  <h1>Pages#new</h1>
-  <img src="https://bloc-global-assets.s3.amazonaws.com/images-full-stack/projects/blocipedia/blocipedia_edit.png" alt="edit page">
-  <br><br>
-  <div class="row">
-    <div class="container col-md-6">
-      <%= render partial: 'form', locals: {page: @page } %>
-    </div>
-    <div class="container col-md-6">
-      <%= render partial: 'form', locals: {page: @page } %>
-    </div>
-  </div>
-  <br><br>
-  <%= button_to "form-save", method: :patch %>
-</div>
+<%= render partial: 'form', locals: {page: @page } %>
