@@ -1,0 +1,14 @@
+<div class="container marketing">
+  <h1><%= @page.title %></h1>
+  <div class="container-border">
+  <p><%= @page.body %></p>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= button_to 'Edit', edit_page_path(@page), {:method=> :get, :class => "btn btn-warning"}%>
+    </div>
+    <div class="col-md-6">
+      <%= button_to 'Delete', page_path(@page), {:method=> :delete, :class => "btn btn-danger"}%>
+    </div>
+  </div>
+</div>

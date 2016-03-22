@@ -1,0 +1,21 @@
+<div class="container marketing">
+  <% if current_user.pages.count != nil%>
+  <h2>Public Pages</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+      <% @pages.each do |page| %>
+        <tr>
+          <td><%= page.title%></br>
+            <small>updated <%= time_ago_in_words(page.updated_at)%></small></td>
+          <td><%= button_to 'Edit', edit_page_path(page), {:method=> :get, :class => "btn btn-warning"}%></td>
+          <td><%= button_to 'Delete', page_path(page), {:method=> :delete, :class => "btn btn-danger"}%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  <% else %>
+  <h2>Create your first page!</h2>
+  <% end%>
+<br><br>
+  <%= button_to 'New Page', new_page_path(@page), {:method=> :get, :class => "btn btn-secondary"}%>
+</div>
