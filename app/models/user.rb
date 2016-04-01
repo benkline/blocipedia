@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable#, :confirmable
   has_many :pages
 
+  enum role: {standard: 0, premium: 1, admin: 2 }
 end

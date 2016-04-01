@@ -11,11 +11,13 @@ page      GET    /pages/:id(.:format)           pages#show
 =end
   def index
     @pages = Page.all
+    authorize @pages
   end
 
   def create
     @page = Page.new(page_params)
     @page.user = current_user
+    authorize @page
 
     if @page.save
      flash[:notice] = "Page was saved."
@@ -28,19 +30,23 @@ page      GET    /pages/:id(.:format)           pages#show
 
   def new
     @page = Page.new
+    authorize @page
   end
 
   def edit
     @page = Page.find(params[:id])
+    authorize @page
   end
 
   def show
     @page = Page.find(params[:id])
+    authorize @page
   end
 
   def update
      @page = Page.find(params[:id])
      @page.assign_attributes(page_params)
+     authorize @page
 
      if @page.save
        flash[:notice] = "Page was updated."
@@ -53,6 +59,7 @@ page      GET    /pages/:id(.:format)           pages#show
 
   def destroy
   @page = Page.find(params[:id])
+  authorize @page
 
   if @page.destroy
     flash[:notice] = "\"#{@page.title}\" was deleted successfully."
@@ -65,7 +72,7 @@ end
 
   private
   def page_params
-    params.require(:page).permit(:user, :title, :body)
+    params.require(:page).permit(:user, :title, :body, :private)
   end
 
 end
