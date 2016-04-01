@@ -1,4 +1,5 @@
 class PagePolicy < ApplicationPolicy
+attr_reader :user, :page
 
   def initialize(user, page)
     @user = user
@@ -22,7 +23,7 @@ class PagePolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    user.present?
   end
 
   def edit?
