@@ -24,6 +24,7 @@ end
   gem 'pry'
 
 group :development, :test do
+  gem 'pundit-matchers', '~> 1.0.2'
   gem 'byebug'
   gem 'spring'
   gem 'rspec-rails'

@@ -13,7 +13,7 @@ let(:page){ create(:page) }
      end
 
      it "responds to private" do
-       expect(page).to respond_to(:body)
+       expect(page).to respond_to(:private)
      end
   end
 end

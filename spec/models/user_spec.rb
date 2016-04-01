@@ -3,43 +3,46 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 let(:user) { create(:user) }
 
-  context "sign in" do
-    #describe "sends email" do
-    #  it "should send an confirmation email" do
-    #    expect(user)
-    #  end
-    #end
-
-    describe "invalid user" do
-      let(:user_with_invalid_email) { build(:user, email: "") }
-      let(:user_with_invalid_email_format) { build(:user, email: "invalid@email") }
-      let(:user_1) { build(:user, email: "user@bloccipedia.com") }
-      let(:user_2) { build(:user, email: "user@bloccipedia.com") }
-
-      it "should be an invalid user due to blank email" do
-        expect(user_with_invalid_email).to_not be_valid
-      end
-
-      it "should be an invalid user due to incorrectly formatted email address" do
-        expect(user_with_invalid_email_format).to_not be_valid
-      end
-
-      #it "should be an invalid user due to duplicate email" do
-      #  user_1
-      #  expect(user_2).to_not be_valid
-      #end
+  context "parameters" do
+    it "responds to email" do
+      expect(user).to respond_to(:email)
     end
-    describe "session create and destroy" do
 
-      it "should create a new session upon sign in" do
-      end
+    it "responds to created_at" do
+      expect(user).to respond_to(:created_at)
+    end
 
-      it "should destroy current session upon sign out" do
-      end
-
-      it "should ... " do
-      end
+    it "responds to updated_at" do
+      expect(user).to respond_to(:updated_at)
     end
   end
 
+  context "premium and admin users" do
+    let(:premium_user) { create(:user, role: 1) }
+    let(:admin_user) { create(:user, role: 2) }
+
+    it "premium? returns false for standard user" do
+      expect(user.premium?).to be_falsey
+    end
+
+    it "admin? returns false for standard user" do
+      expect(user.admin?).to be_falsey
+    end
+
+    it "premium? returns true for premium_user" do
+      expect(premium_user.premium?).to be_truthy
+    end
+
+    it "admin? returns false for premium_user" do
+      expect(premium_user.admin?).to be_falsey
+    end
+
+    it "premium? returns false for admin" do
+      expect(admin_user.premium?).to be_falsey
+    end
+
+    it "admin? returns true for admin" do
+      expect(admin_user.admin?).to be_truthy
+    end
+  end
 end
