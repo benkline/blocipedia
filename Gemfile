@@ -12,7 +12,7 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
-
+  gem 'pundit'
   gem 'devise'
   gem 'sass-rails', '~> 5.0'
   gem 'uglifier', '>= 1.3.0'
@@ -24,6 +24,7 @@ end
   gem 'pry'
 
 group :development, :test do
+  gem 'pundit-matchers', '~> 1.0.2'
   gem 'byebug'
   gem 'spring'
   gem 'rspec-rails'
