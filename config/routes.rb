@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :pages
 
+  resources :charges, only: [:new, :create]
+
+  resources :refunds, only: [:new, :create]
+
   get 'about' => 'welcome#about'
 
   root 'welcome#index'

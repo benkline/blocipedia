@@ -20,12 +20,12 @@ end
 users = User.all
 
 # Create Pages
-50.times do
+7.times do
   page = Page.create!(
     user: users.sample,
     title: Faker::Book.title,
     body: Faker::Hipster.paragraph(2),
-    private: false
+    private: Faker::Boolean.boolean(0.2)
   )
 
  page.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
@@ -36,4 +36,4 @@ pages = Page.all
 #print results
 puts "Seed finished"
 puts "#{User.count} users created"
-puts "#{Page.count} posts created"
+puts "#{Page.count} pages created"
