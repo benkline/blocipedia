@@ -5,6 +5,7 @@ gem 'rails', '4.2.5.1'
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'faker'
 end
 
 group :development do
