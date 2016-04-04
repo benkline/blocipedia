@@ -12,8 +12,10 @@ require "random_data"
   User.create!(
   email:    Faker::Internet.email,
   password: Faker::Internet.password,
-  role:  rand(0..2)
+  role:  rand(0..2),
+  confirmed_at: Time.now
   )
+
 end
 users = User.all
 
