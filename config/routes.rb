@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :charges, only: [:new, :create]
 
-  resources :refund, only: [:new, :create]
+  resources :refunds, only: [:new, :create]
 
   get 'about' => 'welcome#about'
 

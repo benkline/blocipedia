@@ -1,20 +1,11 @@
-class RefundController < ApplicationController
+class RefundsController < ApplicationController
   def create
-    #
-    #
-    # # recall the Stripe customer object, to recall the charge_id
-    # customer = Stripe::Customer
-    #   email: current_user.email,
-    #   card: params[:stripeToken]
-    #
-    # )
-    #
     # # Creates a Stripe refund object
-    # refund = Stripe::Refund.create
+    # refund = Stripe::Refund.create(
     #   charge: #how to easily recall this? Store it in a hash when created? then recall it via current_user.email as key/value pair?
     # )
     #
-    # flash[:notice] = "Sorry to see you go #{current_user.email}! Public Pages will always be free to create and edit!"
+    # flash[:notice] = "Sorry to see you go #{current_user.email}! Public Pages will always be free to create and edit."
     #
     # rescue Stripe::CardError => e
     #   flash[:alert] = e.message
