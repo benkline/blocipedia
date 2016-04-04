@@ -3,7 +3,7 @@
   <h2>Public Pages</h2>
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
-      <% @pages.each do |page| %>
+      <% @pages.where(private: false).each do |page| %>
         <tr>
           <td><%=link_to page.title, page_path(page)%></br>
             <small>updated <%= time_ago_in_words(page.updated_at)%></small></td>
@@ -16,6 +16,30 @@
   <% else %>
   <h2>Create your first page!</h2>
   <% end%>
+
+  <% if current_user.premium? || current_user.admin? %>
+  <h2>Private Pages</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+      <% @pages.where(private: true).each do |page| %>
+        <tr>
+          <td><%=link_to page.title, page_path(page)%></br>
+            <small>updated <%= time_ago_in_words(page.updated_at)%></small></td>
+          <td><%= button_to 'Edit', edit_page_path(page), {:method=> :get, :class => "btn btn-warning"}%></td>
+          <td><%= button_to 'Delete', page_path(page), {:method=> :delete, :class => "btn btn-danger"}%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  <h2>Do you need to cancel your premium membership?</h2>
+  <%=button_to 'Downgrade to Standard Member', new_refund_path, {:method=> :get, :class => "btn btn-warning"} %>
+  <p> Notice: at this time, you will not be reimbursed. That feature is in development</p>
+  <% else %>
+  <h2>Need access to private pages?</h2>
+  <%=button_to 'Become a Premium Member', new_charge_path, {:method=> :get, :class => "btn btn-success"} %>
+  <% end%>
+
+
 <br><br>
   <%= button_to 'New Page', new_page_path(@page), {:method=> :get, :class => "btn btn-secondary"}%>
 </div>
