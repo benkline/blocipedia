@@ -45,4 +45,10 @@ let(:user) { create(:user) }
       expect(admin_user.admin?).to be_truthy
     end
   end
+
+  context "Stripe customer" do
+    it "stores Stripe customer id in a hash with the user email" do
+    end
+  end
+
 end
