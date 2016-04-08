@@ -16,7 +16,7 @@ class ChargesController < ApplicationController
     )
 
     flash[:notice] = "Thank you #{current_user.email}! Private Pages are now yours to create!"
-    current_user.premium!
+    current_user.upgrade
     redirect_to pages_path(current_user)
 
     rescue Stripe::CardError => e

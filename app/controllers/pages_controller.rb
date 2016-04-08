@@ -12,6 +12,7 @@ page      GET    /pages/:id(.:format)           pages#show
   def index
     @pages = Page.all
     @users = User.all
+    @user = current_user
     authorize @pages
   end
 

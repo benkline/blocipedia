@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ChargesController, type: :controller do
-let(:user) { create(:user) }
+let(:my_user) { create(:user) }
 
   before do
-    sign_in user
+    sign_in my_user
   end
 
   describe "GET #new" do
@@ -17,7 +17,7 @@ let(:user) { create(:user) }
   describe "POST #create" do
     it "sets user to premium role" do
       # get :create
-      # expect(user.premium?).to be_truthy
+      # expect(my_user.premium?).to be_truthy
     end
 
     it "redirects to pages index" do
