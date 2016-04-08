@@ -22,7 +22,7 @@ class RefundsController < ApplicationController
   end
 
   def new
-    current_user.standard!
+    current_user.downgrade
     redirect_to pages_path(current_user)
     # #use this one to get the customer charge data
     # @stripe_btn_data = {

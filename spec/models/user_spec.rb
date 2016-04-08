@@ -44,7 +44,36 @@ let(:user) { create(:user) }
     it "admin? returns true for admin" do
       expect(admin_user.admin?).to be_truthy
     end
+
+    it "downgrades premium_user" do
+      expect(premium_user.standard?).to be_falsey
+      premium_user.downgrade
+      expect(premium_user.standard?).to be_truthy
+    end
+
+    it "makes premium_user admin" do
+      expect(premium_user.admin?).to be_falsey
+      premium_user.make_admin
+      expect(premium_user.admin?).to be_truthy
+    end
+
+    it "upgrades standard_user" do
+      expect(user.premium?).to be_falsey
+      user.upgrade
+      expect(user.premium?).to be_truthy
+    end
+
+    it "makes standard_user admin" do
+      expect(user.admin?).to be_falsey
+      user.make_admin
+      expect(user.admin?).to be_truthy
+    end
+
+
+
   end
+
+
 
   context "Stripe customer" do
     it "stores Stripe customer id in a hash with the user email" do

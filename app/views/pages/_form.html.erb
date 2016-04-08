@@ -11,17 +11,24 @@
     </div>
   <% end %>
 
-  <%= form_group_tag(@page.errors[:title]) do %>
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter page title" %>
-  <% end %>
-
-  <%= form_group_tag(@page.errors[:body]) do %>
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 20, class: 'form-control', placeholder: "Enter page body" %>
-  <% end %>
-
   <div class="form-group">
+    <%= form_group_tag(@page.errors[:title]) do %>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "Enter page title" %>
+    <% end %>
+
+    <%= form_group_tag(@page.errors[:body]) do %>
+      <%= f.label :body %>
+      <%= f.text_area :body, rows: 20, class: 'form-control', placeholder: "Enter page body" %>
+    <% end %>
+
+    <% if current_user.admin? || current_user.premium? %>
+      <%= f.label :private, class: 'checkbox' do %>
+        <%= f.check_box :private %> Private wiki
+      <% end %>
+    <% end %>
+
+
     <%= f.submit "Save", class: 'btn btn-success' %>
   </div>
 

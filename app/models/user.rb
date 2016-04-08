@@ -7,4 +7,24 @@ class User < ActiveRecord::Base
   has_many :pages
 
   enum role: {standard: 0, premium: 1, admin: 2 }
+
+  def upgrade
+    self.role = :premium
+    save
+    nil
+  end
+
+  def downgrade
+    self.role = :standard
+    self.pages.each {|page| page.make_public }
+    save
+    nil
+  end
+
+  def make_admin
+    self.role = :admin
+    save
+    nil
+  end
+
 end
