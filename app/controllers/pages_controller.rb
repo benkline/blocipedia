@@ -1,24 +1,16 @@
 class PagesController < ApplicationController
-=begin
-pages     GET    /pages(.:format)               pages#index
-          POST   /pages(.:format)               pages#create
-new_page  GET    /pages/new(.:format)           pages#new
-edit_page GET    /pages/:id/edit(.:format)      pages#edit
-page      GET    /pages/:id(.:format)           pages#show
-          PATCH  /pages/:id(.:format)           pages#update
-          PUT    /pages/:id(.:format)           pages#update
-          DELETE /pages/:id(.:format)           pages#destroy
-=end
   def index
-    @pages = Page.all
-    @users = User.all
+    @pages = policy_scope(Page)
+    #@users = User.all
     @user = current_user
-    authorize @pages
+    #authorize @pages
+    @public_pages = Page.all.where(private:false)
+
   end
 
   def create
     @page = Page.new(page_params)
-    @page.user = current_user
+    @page.creator = current_user
     authorize @page
 
     if @page.save

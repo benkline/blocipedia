@@ -23,13 +23,20 @@
     <% end %>
 
     <% if current_user.admin? || current_user.premium? %>
-      <%= f.label :private, class: 'checkbox' do %>
-        <%= f.check_box :private %> Private wiki
+
+    <div class="container-border">
+
+      <%= form_group_tag(@page.errors[:email]) do %>
+          <%= f.label :email %>
+          <%= f.email_field :collaborators, class: 'form-control', placeholder: "Enter email of user you wish to collaborate with on this page" %>
+        <% end %>
+
+          <%= f.label :private, class: 'checkbox' do %>
+          <%= f.check_box :private %> Private wiki
+        <% end %>
       <% end %>
-    <% end %>
-
-
-    <%= f.submit "Save", class: 'btn btn-success' %>
+    </div>
   </div>
+<%= f.submit "Save", class: 'btn btn-success' %>
 
 <% end %>

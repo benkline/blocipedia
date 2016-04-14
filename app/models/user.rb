@@ -4,7 +4,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :pages
+  has_many :collaborations
+  has_many :collaborating_pages, through: :collaborations, source: :page
+
+  has_many :created_pages, class_name: 'Page', foreign_key: "user_id", inverse_of: :creator
+
+  #delegate :pages, to: :collaborators
 
   enum role: {standard: 0, premium: 1, admin: 2 }
 
@@ -26,5 +31,9 @@ class User < ActiveRecord::Base
     save
     nil
   end
+
+  # def collaborators
+  #   Collaborator.where(user_id: id)
+  # end
 
 end
