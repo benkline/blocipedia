@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-  <div class="header clearfix">
+<div class="header clearfix">
     <% if user_signed_in? %>
       <ul class="nav nav-pills pull-right">
         <li><a href="/pages">Signed in as: <strong><%= current_user.email %></strong></a></li>
@@ -23,7 +23,7 @@
       </ul>
     <% end %>
     <h3 class="text-muted">Blocipedia: Social, Markdown Wikis</h3>
-  </div>
+</div>
   <% if flash[:notice] %>
   <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>

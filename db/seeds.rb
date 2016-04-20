@@ -9,26 +9,31 @@ require "random_data"
 
 # Create Users
 5.times do
-  User.create!(
+  user = User.create!(
   email:    Faker::Internet.email,
-  password: Faker::Internet.password,
+  password: "helloworld",
   role:  rand(0..2),
   confirmed_at: Time.now
   )
 
+  user.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+  user.update_attribute(:updated_at, rand(10.minutes .. 1.year).ago)
 end
+
 users = User.all
 
 # Create Pages
-7.times do
+10.times do
   page = Page.create!(
-    user: users.sample,
+    creator: users.sample,
+    collaborators: users.sample(2),
     title: Faker::Book.title,
     body: Faker::Hipster.paragraph(2),
     private: Faker::Boolean.boolean(0.2)
   )
 
  page.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+ page.update_attribute(:updated_at, rand(10.minutes .. 1.year).ago)
 end
 
 pages = Page.all

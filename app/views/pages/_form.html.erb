@@ -1,35 +1,33 @@
 <%= form_for @page do |f| %>
-
-  <% if @page.errors.any? %>
+<% if page.errors.any? %>
     <div class="alert alert-danger">
-      <h4><%= pluralize(@page.errors.count, "error") %>.</h4>
+      <h4><%= pluralize(post.errors.count, "error") %>.</h4>
       <ul>
-        <% @page.errors.full_messages.each do |msg| %>
+        <% post.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= form_group_tag(@page.errors[:title]) do %>
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control', placeholder: "Enter page title" %>
-    <% end %>
-
-    <%= form_group_tag(@page.errors[:body]) do %>
-      <%= f.label :body %>
-      <%= f.text_area :body, rows: 20, class: 'form-control', placeholder: "Enter page body" %>
-    <% end %>
-
-    <% if current_user.admin? || current_user.premium? %>
-      <%= f.label :private, class: 'checkbox' do %>
-        <%= f.check_box :private %> Private wiki
+    <p>
+      <%= form_group_tag(page.errors[:title]) do %>
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', placeholder: "Enter page title" %>
       <% end %>
+      <%= form_group_tag(page.errors[:body]) do %>
+        <%= f.label :body %>
+        <%= f.text_area :body, rows: 10, class: 'form-control', placeholder: "Enter page body" %>
+      <% end %>
+    </p>
+    <% if current_user.premium? || current_user.admin? %>
+      <p>
+        <%= f.label :private, class: 'checkbox' %>
+        <%= f.check_box :private %> Private wiki
+        <div class="form-group">
+          <%= render partial: 'collaborators/form', locals: { f: f, labels: @page.collaborators } %>
+        </div>
+      </p>
     <% end %>
-
-
-    <%= f.submit "Save", class: 'btn btn-success' %>
-  </div>
-
+  <%= f.submit "Save", class: 'btn btn-success' %>
+  <br><br>
 <% end %>

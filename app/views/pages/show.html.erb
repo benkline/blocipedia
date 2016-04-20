@@ -1,14 +1,25 @@
 <div class="container marketing">
   <h1><%= @page.title %></h1>
   <div class="container-border">
-  <p><%= @page.body %></p>
+    <%= @page.body %>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <%= button_to 'Edit', edit_page_path(@page), {:method=> :get, :class => "btn btn-warning"}%>
+  <% if @page.collaborators == !nil%>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+          <tr><h3>Page collaborators</h3></tr>
+            <% @page.collaborators.each do |user| %>
+            <tr><td><%=@page.collaborators.email%></br></tr>
+          <% end %>
+      </table>
     </div>
-    <div class="col-md-6">
-      <%= button_to 'Delete', page_path(@page), {:method=> :delete, :class => "btn btn-danger"}%>
+    <% end %>
+    <div class="row">
+      <div class="col-md-4">
+        <%= button_to 'Edit', edit_page_path(@page), {:method=> :get, :class => "btn btn-warning"}%>
+      </div>
+      <div class="col-md-4">
+        <%= button_to 'Delete', page_path(@page), {:method=> :delete, :class => "btn btn-danger"}%>
+      </div>
     </div>
   </div>
 </div>
