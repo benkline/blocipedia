@@ -14,26 +14,24 @@ class User < ActiveRecord::Base
   enum role: {standard: 0, premium: 1, admin: 2 }
 
   def upgrade
-    self.role = :premium
+    self.role = 1
     save
     nil
   end
 
   def downgrade
-    self.role = :standard
-    self.pages.each {|page| page.make_public }
+    self.role = 0
+    self.created_pages.each {|page| page.make_public }
     save
     nil
   end
 
   def make_admin
-    self.role = :admin
+    self.role = 2
     save
     nil
   end
 
-  # def collaborators
-  #   Collaborator.where(user_id: id)
-  # end
+
 
 end

@@ -4,9 +4,13 @@ class Page < ActiveRecord::Base
 
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id', inverse_of: :created_pages
 
-  # scope :pub, -> { where(private: false) }
-  # scope :priv, -> { where(private: true) }
-
+  def self.update_collaborators(collaborators_string)
+    return [] if collaborators_string.blank?
+    collaborators_string.split(",").map do |collaborator|
+      User.find_by(email: collaborator.strip)
+    end.compact
+  end
+  
   def make_public
     self.private = false
     save
@@ -18,7 +22,6 @@ class Page < ActiveRecord::Base
     save
     nil
   end
-
 
   def private?
     self.private = true

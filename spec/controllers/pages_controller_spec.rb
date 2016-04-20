@@ -2,13 +2,16 @@ require 'rails_helper'
 require 'random_data'
 
 RSpec.describe PagesController, type: :controller do
-let(:my_user) { create(:user) }
-let(:my_page) { create(:page, user: my_user) }
-
+let(:my_user)             { FactoryGirl.create :user }
+let(:collaborating_user)  { FactoryGirl.create :user }
+let(:my_page)             { FactoryGirl.create :page, private: false}
+let(:collaborate_page)  { FactoryGirl.create :page_with_collaborators}
+let(:created_page)        { FactoryGirl.create :page, private: true, creator: my_user}
 
   context "basic pages crud" do
     before do
       sign_in my_user
+      sign_in collaborating_user
     end
 
     it "should have a current_user" do
@@ -19,11 +22,6 @@ let(:my_page) { create(:page, user: my_user) }
       it "returns http success" do
         get :index
         expect(response).to have_http_status(:success)
-      end
-
-      it "assigns Pages.all to page" do
-        get :index
-        expect(assigns(:pages)).to eq([my_page])
       end
     end
 

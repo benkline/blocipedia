@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%= f.label :collaborators %>
+  <%= f.text_field :collaborators,
+                   class: 'form-control',
+                   placeholder: "Enter emails of collaborators (separated by commas)",
+                   value: @page.collaborators.map(&:email).join(', ') %>
+</div>
