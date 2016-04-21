@@ -5,7 +5,6 @@ gem 'rails', '4.2.5.1'
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'faker'
 end
 
 group :development do
@@ -13,7 +12,9 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
+  gem 'redcarpet'
   gem 'stripe'
+  gem 'faker'
   gem 'pundit'
   gem 'devise'
   gem 'sass-rails', '~> 5.0'
@@ -31,7 +32,6 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'shoulda'
-  gem 'faker'
   gem 'factory_girl_rails'
 
 end

@@ -10,7 +10,7 @@ class Page < ActiveRecord::Base
       User.find_by(email: collaborator.strip)
     end.compact
   end
-  
+
   def make_public
     self.private = false
     save
