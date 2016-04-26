@@ -1,28 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe ChargesController, type: :controller do
-let(:my_user) { create(:user) }
+let(:user) { create(:user) }
 
   before do
-    sign_in my_user
+    sign_in user
   end
 
   describe "GET #new" do
     context "Stripe" do
-      it "I don't exactly understand what this code does, so don't know how to test it" do
+      it "" do
       end
     end
   end
 
   describe "POST #create" do
     it "sets user to premium role" do
-      # get :create
-      # expect(my_user.premium?).to be_truthy
-    end
-
-    it "redirects to pages index" do
-      # get :create
-      # expect(response).to redirect_to("/pages.1")
+      get :create
+      expect(user.premium?).to be_truthy
     end
 
     context "Stripe" do

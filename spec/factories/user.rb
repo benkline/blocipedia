@@ -27,5 +27,6 @@ FactoryGirl.define do
         create_list(:page, evaluator.collaborating_pages_count, private: true)
       end
     end
+
   end
 end

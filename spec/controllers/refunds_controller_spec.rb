@@ -11,33 +11,33 @@ let(:user) { create(:user, role: 0) }
     end
 
     it "sets user to standard role" do
-      # get :new
-      # expect(user.standard?).to be_truthy
+      get :new
+      expect(user.standard?).to be_truthy
     end
 
-    it "redirects to pages#index" do
-      # get :new
-      # expect(response).to redirect_to(index)
-    end
-  end
-
-  describe "POST #create" do
-    context "Stripe" do
-      it "retrievs customer.id from user model hash" do
-      end
-
-      it "creates Stripe refund object" do
-      end
-    end
-
-    it "sets user to standard role" do
-      # get :new
-      # expect(user.standard?).to be_truthy
-    end
-
-    it "redirects to pages#index" do
-      # get :create
-      # expect(response).to redirect_to("/pages.1")
+    it "redirects to pages_path" do
+      get :new
+      expect(response).to redirect_to("/pages.1")
     end
   end
+
+  # describe "POST #create" do
+  #   context "Stripe" do
+  #     it "retrievs customer.id from user model hash" do
+  #     end
+  #
+  #     it "creates Stripe refund object" do
+  #     end
+  #   end
+  #
+  #   it "sets user to standard role" do
+  #     get :new
+  #     expect(user.standard?).to be_truthy
+  #   end
+  #
+  #   it "redirects to pages_path" do
+  #     get :create
+  #     expect(response).to redirect_to("/pages.1")
+  #   end
+  # end
 end

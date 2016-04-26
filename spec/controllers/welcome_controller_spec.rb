@@ -11,10 +11,10 @@ RSpec.describe WelcomeController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "returns http success" do
-      # get :about
-      # expect(response).to have_http_status(:success)
-    end
+    # it "returns http success" do
+    #   get :about
+    #   expect(response).to have_http_status(:success)
+    # end
   end
 
   describe "authentication" do
