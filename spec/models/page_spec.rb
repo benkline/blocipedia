@@ -1,36 +1,46 @@
 require 'rails_helper'
 
 RSpec.describe Page, type: :model do
-let(:my_page){ create(:page, private: false) }
-let(:private_page){ create(:page, private: true) }
+let(:page){ create(:page) }
+let(:collaborating_page){ create(:collaborating_page) }
 
 
-  describe "attributes" do
+  context "attributes" do
     it "responds to title" do
-      expect(my_page).to respond_to(:title)
+      expect(page).to respond_to(:title)
     end
 
     it "responds to body" do
-      expect(my_page).to respond_to(:body)
+      expect(page).to respond_to(:body)
     end
 
     it "responds to private" do
-      expect(my_page).to respond_to(:private)
+      expect(page).to respond_to(:private)
     end
   end
 
 
-  describe "methods" do
-    it "make_public turns private_page into public_page " do
-      # expect(private_page.private?).to be(true)
-      # private_page.make_public
-      # expect(private_page.private?).to be(false)
+  context "methods" do
+    describe ".make_public" do
+      it "make_public turns private page public " do
+        expect(collaborating_page.private?).to be_truthy
+        collaborating_page.make_public
+        expect(collaborating_page.public?).to be_truthy
+      end
+
     end
 
-    it "make_private turns public_page into private_page " do
-      # expect(my_page.private?).to be(false)
-      # my_page.make_private
-      # expect(my_page.private?).to be(true)
+    describe ".make_private" do
+      it "make_private turns public_page into private_page " do
+        expect(page.public?).to be_truthy
+        page.make_private
+        expect(page.private?).to be_truthy
+      end
+    end
+
+    describe ".update_collaborators"do
+      it "" do
+      end
     end
   end
 end
