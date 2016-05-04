@@ -27,6 +27,7 @@ let(:collaborating_page){ create(:collaborating_page) }
         collaborating_page.make_public
         expect(collaborating_page.public?).to be_truthy
       end
+
     end
 
     describe ".make_private" do

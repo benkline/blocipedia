@@ -9,7 +9,7 @@ let(:collaborator)        { create :collaborator }
 let(:admin)               { create :user, role: 2 }
 let(:page)                { create :page, private: false}
 let(:collaborating_page)  { create :collaborating_page}
-let(:created_page)        { create :page, private: true, creator: user}
+let(:created_page)        { create :page, private: true, creator: creator}
 
   before do
     sign_in user
@@ -147,35 +147,47 @@ let(:created_page)        { create :page, private: true, creator: user}
   context "authorization" do
     describe "free user" do
       it "should NOT be able to view any private pages" do
-      end
+        current_user = free_user
+        pp = Page.public_only
 
-      it "should be able to view all public pages" do
+        get :index
+        expect(@pages.to_a).to match_array(pp)
       end
     end
 
     describe "premium user" do
-      it "should be able to view created pages" do
+      it "should be able to view collaborating pages" do
+        current_user = user
+        pp = Page.for_collaborator(user)
+
+        get :index
+        expect( @collaborating_pages.to_a).to match_array(pp)
       end
 
-      it "should be able to view collaborating pages" do
+      it "should be able to view created pages" do
+        current_user = user
+        pp = Page.for_creator(user)
+
+        get :index
+        expect(@created_pages.to_a).to match_array(pp)
       end
 
       it "should NOT be able to view other user's private pages" do
-      end
+        current_user = user
+        pp = Page.for_collaborator(collaborator)
 
-      it "should be able to view all public pages" do
+        get :index
+        expect(@pages.to_a).to match_array(pp)
       end
-
     end
 
     describe "admin user" do
-      it "should be able to view all private pages" do
-      end
+      it "should be able to view all pages" do
+        current_user = admin
+        pp = Page.all
 
-      it "should be able to view private pages" do
-      end
-
-      it "should be able to view all public pages" do
+        get :index
+        expect(@pages.to_a).to match_array(pp)
       end
     end
 

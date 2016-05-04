@@ -4,6 +4,15 @@ class Page < ActiveRecord::Base
 
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id', inverse_of: :created_pages
 
+  scope (:private_only),      -> { where(private: true)}
+  scope (:public_only),       -> { where(private: false)}
+  scope (:for_creator),       -> (user){ where(creator: user)}
+  scope (:for_collaborator),  -> (user) {joins(:collaborators).where("collaborations.user_id = ?", user )}
+
+  # def self.for_collaborator(user)
+  #   joins(:collaborators).where("collaborations.user_id = ?", user )
+  # end
+
   def self.update_collaborators(collaborators_string)
     return [] if collaborators_string.blank?
     collaborators_string.split(",").map do |collaborator|
@@ -24,11 +33,11 @@ class Page < ActiveRecord::Base
   end
 
   def private?
-    self.private = true
+    self.private == true
   end
 
   def public?
-    self.private = false
+    self.private == false
   end
 
 end
